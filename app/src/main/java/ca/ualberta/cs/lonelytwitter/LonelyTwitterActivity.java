@@ -12,6 +12,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,7 +40,15 @@ public class LonelyTwitterActivity extends Activity {
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
-				saveInFile(text, new Date(System.currentTimeMillis()));
+				NormalTweet newTweet = new NormalTweet(text);
+				if (Math.random()>0.5) {
+					newTweet.addMood(new ExcitedMood());
+				}else{
+					newTweet.addMood(new WorriedMood());
+				}
+
+				saveTweet(newTweet);
+				//saveInFile(text, new Date(System.currentTimeMillis()));
 				//finish();
 
 			}
@@ -76,7 +85,19 @@ public class LonelyTwitterActivity extends Activity {
 		}
 		return tweets.toArray(new String[tweets.size()]);
 	}
-	
+
+	private void saveTweet(Tweet tweet){
+		String text = tweet.getMessage();
+		if (!tweet.getMoods().isEmpty()){
+			text += " Feeling: ";
+			for (Mood m : tweet.getMoods()){
+				text += m.format() + ", ";
+			}
+			text = text.substring(0,text.length()-2);
+		}
+		saveInFile(text, tweet.getDate());
+	}
+
 	private void saveInFile(String text, Date date) {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
