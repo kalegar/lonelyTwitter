@@ -11,38 +11,17 @@ public abstract class Tweet {
 
     private String message;
     private Date date;
-    private ArrayList<Mood> moods = new ArrayList<Mood>();
 
-    public Tweet(String message){
+    public Tweet(String message) {
         try {
             setMessage(message);
-        } catch (TweetTooLongException e){
-
-        }
-        this.date = new Date(System.currentTimeMillis());
-    }
-
-    public Tweet(String Message, Mood mood){
-        moods.add(mood);
-        try {
-            setMessage(message);
-        } catch (TweetTooLongException e){
+        } catch (TweetTooLongException e) {
 
         }
         this.date = new Date(System.currentTimeMillis());
     }
 
     public Tweet(String message, Date date){
-        try {
-            setMessage(message);
-        } catch (TweetTooLongException e){
-
-        }
-        this.date = date;
-    }
-
-    public Tweet(String message, Mood mood, Date date){
-        moods.add(mood);
         try {
             setMessage(message);
         } catch (TweetTooLongException e){
@@ -73,11 +52,8 @@ public abstract class Tweet {
         this.date = date;
     }
 
-    public ArrayList<Mood> getMoods() {
-        return moods;
-    }
-
-    public void addMood(Mood mood){
-        moods.add(mood);
+    @Override
+    public String toString() {
+        return date.toString() + " | " + message;
     }
 }

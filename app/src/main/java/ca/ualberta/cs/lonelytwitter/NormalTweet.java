@@ -1,5 +1,6 @@
 package ca.ualberta.cs.lonelytwitter;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -8,8 +9,8 @@ import java.util.Date;
 
 public class NormalTweet extends Tweet {
 
-    public NormalTweet(String Message) {
-        super(Message);
+    public NormalTweet(String message) {
+        super(message);
     }
 
     public NormalTweet(String message, Date date) {
