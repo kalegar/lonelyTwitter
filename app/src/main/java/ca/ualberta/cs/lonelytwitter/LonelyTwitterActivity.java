@@ -37,7 +37,11 @@ public class LonelyTwitterActivity extends Activity {
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
 	
-	/** Called when the activity is first created. */
+	/**
+	 *  Called when the activity is first created.
+	 *
+	 *  @param savedInstanceState
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,6 +81,10 @@ public class LonelyTwitterActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Called when the activity is started.
+	 *
+	 */
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -88,6 +96,10 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 * Loads old tweets from the data file specified in FILENAME
+	 * The tweets are stored in an ArrayList called tweetList
+	 */
 	private void loadFromFile() {
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
@@ -108,6 +120,10 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Saves the current list of tweets to the data
+	 * file specified by FILENAME
+	 */
 	private void saveInFile() {
 
 		try {
