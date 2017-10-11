@@ -66,7 +66,9 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				tweetList.clear();
 				ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
-				getTweetsTask.execute(bodyText.getText().toString());
+				String text = bodyText.getText().toString();
+				String query = "{\n" + " \"query\": { \"term\": {\"message\":\"" + text + "\"} }\n" + "}";
+				getTweetsTask.execute(query);
 				try{
 					tweetList = getTweetsTask.get();
 				}catch (Exception e){
